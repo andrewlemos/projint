@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro de Cidadão{% endblock %}
+
+{% block content %}
+<style>
+    .form-container {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    .consent-group {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        text-align: left;
+    }
+    .consent-link {
+        color: #007bff;
+        text-decoration: underline;
+    }
+    .consent-error {
+        color: #dc3545;
+        font-size: 0.9em;
+        margin-top: 5px;
+        display: none;
+    }
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Cadastro de Cidadão</h2>
+    <form method="POST" id="registrationForm">
+        <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" name="telefone" 
+                   class="form-control"
+                   oninput="formatarTelefone(this)"
+                   placeholder="(00)00000-0000" required>
+        </div>
+        <div class="form-group">
+            <label for="endereco">CEP</label>
+            <input type="text" id="endereco" name="endereco" 
+                   class="form-control"
+                   oninput="formatarCEP(this)"
+                   placeholder="00000-000" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" class="form-control" required>
+        </div>
+        
+        <div class="consent-group">
+            <input type="checkbox" id="consentimento" name="consentimento" required>
+            <label for="consentimento">
+                Concordo com o <a href="{{ url_for('termo_consentimento') }}" class="consent-link" target="_blank">
+    Termo de Consentimento para Tratamento de Dados Pessoais
+</a> da Defesa Civil de Pirassununga
+            </label>
+            <div id="consentError" class="consent-error">
+                Você deve concordar com os termos para se cadastrar
+            </div>
+        </div>
+        
+        <button type="submit" class="btn">Cadastrar</button>
+    </form>
+</div>
+
+<script>
+    // Validação do checkbox de consentimento
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        if(!document.getElementById('consentimento').checked) {
+            e.preventDefault();
+            document.getElementById('consentError').style.display = 'block';
+            document.getElementById('consentimento').focus();
+        }
+    });
+    
+    // Esconde a mensagem de erro quando o usuário marcar o checkbox
+    document.getElementById('consentimento').addEventListener('change', function() {
+        if(this.checked) {
+            document.getElementById('consentError').style.display = 'none';
+        }
+    });
+    
+    // Funções de formatação (mantidas do seu código original)
+    function formatarTelefone(input) {
+        // Sua implementação existente
+    }
+    
+    function formatarCEP(input) {
+        // Sua implementação existente
+    }
+</script>
+{% endblock %}

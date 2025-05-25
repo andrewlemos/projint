@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Painel do Funcionário{% endblock %}
+
+{% block content %}
+
+    <h2>Bem-vindo(a), {{ nome }}</h2>
+
+    <div class="weather-info">
+
+        <div class="weather-card">
+            <h3>Data/Hora</h3>
+            <p>{{ dados_tempo.data_hora }}</p>  <!-- Convertido para Local na função obter_dados_tempo_presente() -->
+            <small>Atualizado: {{ dados_tempo.atualizacao }}</small>
+        </div>
+
+        <div class="weather-card">
+            <h3>Temperatura</h3>
+            <p>{{ dados_tempo.temperatura }}</p>
+        </div>
+
+        <div class="weather-card">
+            <h3>Umidade</h3>
+            <p>{{ dados_tempo.umidade }}</p>
+        </div>
+
+        <div class="weather-card">
+            <h3>Céu</h3>
+            <p>{{ dados_tempo.ceu }}</p>
+        </div>
+
+        <div class="weather-card">
+            <h3>Condição</h3>
+            <p>{{ dados_tempo.condicao_tempo }}</p>
+        </div>
+
+        <div class="weather-card">
+            <h3>Vento</h3>
+            <p>{{ dados_tempo.vento }}</p>
+        </div>
+
+    </div>
+
+    <div class="dashboard-layout">
+        <!-- Coluna do formulário (1/3) -->
+        <div class="form-column">
+            <div class="form-container">
+                <h3>Criar Novo Alerta</h3>
+                <form method="post" action="{{ url_for('novo_alerta') }}">
+                    <div class="form-group">
+                        <label for="descricao">Descrição do Risco</label>
+                        <input type="text" id="descricao" name="descricao" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cep">CEP Afetado</label>
+                        <input type="text" id="cep" name="cep" required>
+                    </div>
+                    <button type="submit" class="btn">Enviar Alerta</button>
+                </form>
+            </div>
+
+            <div class="alert-history">
+                <h3>Últimos Alertas</h3>
+                <ul class="alert-list">
+                    {% for alerta in alertas %}
+                    <li class="alert-item">
+                        <strong>{{ alerta.descricao }}</strong><br>
+                        CEP: {{ alerta.cep_afetado }} |
+                        {{ alerta.data_criacao_local }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="iframe-column">
+            <!-- Iframe da REDEMET -->
+            <div class="iframe-container">
+                <h3>Informações Meteorológicas - REDEMET</h3>
+                <iframe src="https://redemet.decea.mil.br/"
+                        allowfullscreen
+                        class="monitoring-iframe"></iframe>
+            </div>
+
+            <!-- Iframe do SIPAM -->
+            <div class="iframe-container" style="margin-top: 20px;">
+                <h3>Monitoramento de Queimadas - SIPAM</h3>
+                <iframe src="https://panorama.sipam.gov.br/painel-do-fogo/"
+                        allowfullscreen
+                        class="monitoring-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="weather-alerts">
+        <h3>Alertas de Aeródromo - {{ LOCALIDADE }}</h3>
+        {% if alertas_meteo and alertas_meteo|length > 0 %}
+            <div class="alert-container">
+                {% for alerta in alertas_meteo %}
+                    {% if alerta %}  <!-- Verifica se o alerta não é None -->
+                    <div class="alert-meteo {% if alerta.has_ts %}alert-thunder{% endif %} {% if alerta.has_wspd %}alert-wind{% endif %}">
+                        <div class="alert-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>{{ alerta.mensagem }}</strong>
+                        </div>
+                        <div class="alert-body">
+                            <p><small>{{ alerta.mensagem_original }}</small></p>
+                            {% if alerta.vento %}
+                                <p>Intensidade do vento: 
+                                    {{ alerta.vento.base_kt }} nós
+                                    {% if alerta.vento.base_kmh %}(~{{ alerta.vento.base_kmh }} km/h){% endif %}
+                                    {% if alerta.vento.max_kt %} a {{ alerta.vento.max_kt }} nós{% endif %}
+                                    {% if alerta.vento.max_kmh %}(~{{ alerta.vento.max_kmh }} km/h){% endif %}
+                                </p>
+                            {% endif %}
+                            <p class="alert-time">
+                                ⏱️ Válido: {{ alerta.validade_inicio }} até {{ alerta.validade_fim }}
+                                <br>🔄 Atualizado: {{ alerta.timestamp }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-alerts">
+                <i class="fas fa-check-circle"></i>
+                Nenhum alerta ativo para {{ LOCALIDADE }} no período atual
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+    </script>
+<!-- Sistema de Alerta Sonoro com Toggle -->
+<div class="audio-controls">
+    <audio id="alertSound" src="{{ url_for('static', filename='alerta.mp3') }}" preload="auto"></audio>
+    <button id="soundToggle" class="btn btn-sound">
+        <i class="fas fa-volume-mute"></i> Desativar Som
+    </button>
+</div>
+
+<script>
+    // Verifica se há alertas para tocar
+    {% if tem_alertas %}
+    document.addEventListener('DOMContentLoaded', function() {
+        const alertSound = document.getElementById('alertSound');
+        const soundToggle = document.getElementById('soundToggle');
+
+        // Define som ativado no primeiro acesso
+        if (localStorage.getItem('alertMuted') === null) {
+            localStorage.setItem('alertMuted', 'false');
+        }
+
+        let playCount = 0;
+        const maxPlays = 5;
+        let soundInterval;
+
+        function isMuted() {
+            return localStorage.getItem('alertMuted') === 'true';
+        }
+
+        function updateButton() {
+            if (isMuted()) {
+                soundToggle.innerHTML = '<i class="fas fa-volume-up"></i> Ativar Som';
+            } else {
+                soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i> Desativar Som';
+            }
+        }
+
+        function playAlert() {
+            if (isMuted() || playCount >= maxPlays) return;
+            alertSound.currentTime = 0;
+            alertSound.play().then(() => playCount++).catch(e => {
+                console.log("Reprodução bloqueada pelo navegador", e);
+            });
+        }
+
+        function startAlerts() {
+            soundInterval = setInterval(playAlert, 3000);
+            playAlert();
+        }
+
+        function stopAlerts() {
+            clearInterval(soundInterval);
+            alertSound.pause();
+        }
+
+        updateButton();
+
+        if (!isMuted()) {
+            startAlerts();
+        }
+
+        soundToggle.addEventListener('click', () => {
+            const newMuteState = !isMuted();
+            localStorage.setItem('alertMuted', newMuteState.toString());
+            updateButton();
+
+            if (newMuteState) {
+                stopAlerts();
+            } else {
+                playCount = 0;
+                startAlerts();
+            }
+        });
+    });
+    {% endif %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="termo-container">
+    <h1 class="termo-title">Termo de Consentimento para Tratamento de Dados Pessoais</h1>
+    <p class="termo-subtitle">Plataforma de Alertas da Defesa Civil de Pirassununga</p>
+    
+    <div class="termo-content">
+        <p>Em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)</strong>, este termo estabelece as condições para coleta e uso dos seus dados pessoais.</p>
+
+        <div class="termo-section">
+            <h2>1. Dados Coletados</h2>
+            <p>A Defesa Civil de Pirassununga coletará apenas:</p>
+            <ul>
+                <li><strong>Nome completo</strong> (para identificação)</li>
+                <li><strong>Endereço de e-mail</strong> (para comunicação)</li>
+                <li><strong>Número de telefone</strong> (para alertas emergenciais)</li>
+                <li><strong>CEP</strong> (para localização geográfica)</li>
+            </ul>
+        </div>
+
+        <div class="termo-section">
+            <h2>2. Finalidade do Uso</h2>
+            <p>Seus dados serão utilizados exclusivamente para:</p>
+            <ul>
+                <li>Envios de alertas sobre riscos iminentes (desastres naturais, emergências públicas)</li>
+                <li>Comunicações urgentes relacionadas à segurança da população</li>
+            </ul>
+            <p>Base legal: Art. 7º, II da LGPD ("cumprimento de obrigação legal pelo controlador").</p>
+        </div>
+
+        <div class="termo-section">
+            <h2>3. Proteção e Sigilo</h2>
+            <p>Em observância ao <strong>Art. 23 da LGPD</strong>:</p>
+            <ul>
+                <li>Seus dados <strong>não serão compartilhados</strong> com terceiros</li>
+                <li>Adotamos medidas de segurança para proteção das informações</li>
+                <li>Exceções: determinação judicial ou exigência legal (Art. 7º, VI da LGPD)</li>
+            </ul>
+        </div>
+
+        <div class="termo-section">
+            <h2>4. Seus Direitos (Art. 18 da LGPD)</h2>
+            <p>Você pode, a qualquer momento:</p>
+            <ul>
+                <li>Acessar ou corrigir seus dados</li>
+                <li>Solicitar a exclusão do cadastro</li>
+                <li>Revogar este consentimento</li>
+            </ul>
+            <p>Para exercer esses direitos, entre em contato:</p>
+            <div class="contact-info">
+                <p><strong>E-mail:</strong> defesacivil@pirassununga.sp.gov.br</p>
+                <p><strong>Telefone:</strong> (19) 3561-2851</p>
+                <p class="small-text">(Prazo máximo para atendimento: 5 dias úteis, conforme Art. 42 da LGPD)</p>
+            </div>
+        </div>
+
+        <div class="termo-section">
+            <h2>5. Consentimento</h2>
+            <p>Ao marcar "Concordo" e prosseguir com o cadastro, você declara:</p>
+            <ul>
+                <li>Ter lido e compreendido este Termo na íntegra</li>
+                <li>Autorizar o tratamento dos dados nos termos da LGPD</li>
+                <li>Estar ciente de seus direitos</li>
+            </ul>
+        </div>
+
+        <div class="termo-footer">
+            <p><strong>Defesa Civil de Pirassununga</strong></p>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .termo-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    
+    .termo-title {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .termo-subtitle {
+        text-align: center;
+        color: #7f8c8d;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .termo-section {
+        margin-bottom: 2rem;
+    }
+    
+    .termo-section h2 {
+        color: #2980b9;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .termo-section ul {
+        margin-left: 1.5rem;
+        line-height: 1.6;
+    }
+    
+    .contact-info {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+    
+    .small-text {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        margin-top: 0.5rem;
+    }
+    
+    .termo-footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+        color: #7f8c8d;
+    }
+</style>
+{% endblock %}

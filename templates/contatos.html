@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Contatos - Defesa Civil Pirassununga{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">Defesa Civil de Pirassununga</h1>
+    
+    <div class="row">
+        <!-- Mapa -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Localização</h2>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3694.0452923119086!2d-47.43472292413303!3d-22.19198091439761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c80bfe6a38f7a5%3A0x1acce6a4a9a9a9a9!2sAv.%20Padre%20L%C3%A9o%20Lunders%2C%201877%20-%20Vila%20Guilhermina%2C%20Pirassununga%20-%20SP%2C%2013634-200!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                            width="600" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="embed-responsive-item">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações de Contato -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Contatos</h2>
+                    <div class="contact-info">
+                        <p><strong>Endereço:</strong> Av. Padre Léo Lunders, 1877 – Vila Guilhermina, Pirassununga - SP, 13634-200</p>
+                        <p><strong>Telefone:</strong> (19) 3565-2851</p>
+                        <p><strong>WhatsApp Emergências:</strong><a href="https://wa.me/+551935652851" target="_blank">(19)3565-2851</a></number></p>
+                        <p><strong>Outras informações:</strong>(19)3561-1279</p>
+                        <p><strong>E-mail:</strong> defesacivil@pirassununga.sp.gov.br</p>
+                        <p><strong>Disque-Defesa Civil:</strong> 199</p>
+                        <p><strong>Coordenador Municipal:</strong> Carlos Eduardo Alves de Souza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sobre a Defesa Civil -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Sobre a Defesa Civil</h2>
+            <p>A Defesa Civil de Pirassununga atua na prevenção, mitigação, preparação, resposta e recuperação de desastres, além de realizar ações para minimizar riscos e atender emergências como deslizamentos, queda de árvores, vistorias pós-incêndio e alagamentos.</p>
+            
+            <h3 class="mt-4">Principais funções:</h3>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="function-card mb-3 p-3 bg-light rounded">
+                        <h4>Prevenção</h4>
+                        <p>Identificar e avaliar riscos, promover a conscientização da população e implementar medidas para reduzir a vulnerabilidade.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="function-card mb-3 p-3 bg-light rounded">
+                        <h4>Mitigação</h4>
+                        <p>Reduzir o impacto das ocorrências, como a implementação de medidas de segurança em construções e infraestruturas.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="function-card mb-3 p-3 bg-light rounded">
+                        <h4>Preparação</h4>
+                        <p>Desenvolver planos de emergência, realizar simulados e treinar as equipes para lidar com diferentes tipos de desastres.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="function-card mb-3 p-3 bg-light rounded">
+                        <h4>Resposta</h4>
+                        <p>Atuar em situações de emergência, como prestar primeiros socorros, distribuir materiais de primeira necessidade e restabelecer serviços essenciais.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="function-card mb-3 p-3 bg-light rounded">
+                        <h4>Recuperação</h4>
+                        <p>Apoiar a população afetada, reconstruir áreas danificadas e implementar medidas para prevenir novas ocorrências.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .function-card {
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    .function-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .contact-info p {
+        margin-bottom: 1rem;
+    }
+    .embed-responsive {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .card {
+        border: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    h2, h3, h4 {
+        color: #2c3e50;
+    }
+</style>
+{% endblock %}
