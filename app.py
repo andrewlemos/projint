@@ -20,6 +20,7 @@ import socket
 
 load_dotenv()
 app = Flask(__name__)
+admin_senha = os.getenv("ADMIN_SENHA")
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///defesa_civil.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
