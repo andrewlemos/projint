@@ -26,6 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///defesa_civil.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 # Configuração do Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
