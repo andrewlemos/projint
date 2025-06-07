@@ -148,6 +148,19 @@ defesa-civil-app/
 
 ---
 
+## 📷 Imagens
+
+![Captura de tela 2025-05-25 034341](https://github.com/user-attachments/assets/b4878b58-36ea-4e30-9fdb-66cee9a4651f)
+![Captura de tela 2025-05-25 034231](https://github.com/user-attachments/assets/b4367414-b12d-436c-9639-ca5a648214dd)
+![Captura de tela 2025-05-25 034036](https://github.com/user-attachments/assets/a305cbe7-94b2-4d61-83bb-69ee3489c768)
+![Captura de tela 2025-05-25 033818](https://github.com/user-attachments/assets/b0e71031-7bbd-4480-ae22-a5bf84bf8754)
+![Captura de tela 2025-05-25 033636](https://github.com/user-attachments/assets/17481caf-9c50-409f-8a91-380797eb2334)
+![Captura de tela 2025-05-25 033228](https://github.com/user-attachments/assets/0710e808-ebd3-4f1a-94bc-680ce2946923)
+![Captura de tela 2025-05-25 033029](https://github.com/user-attachments/assets/14a5ca90-3539-4796-b348-4a788ec0ea1b)
+![Captura de tela 2025-05-25 032600](https://github.com/user-attachments/assets/c9202c90-e6c8-4a61-a522-c53ee8233562)
+
+---
+
 ## 📜 Licença
 
 Este projeto está **sob consulta do desenvolvedor**.  
